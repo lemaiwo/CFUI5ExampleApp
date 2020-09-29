@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0"
+    xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx"
+    xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata"
+    xmlns:sap="http://www.sap.com/Protocols/SAPData">
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema Namespace="ZPM_MEASURING_POINT_SRV" xml:lang="en" sap:schema-version="1"
+            xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <EntityType Name="Subscription" sap:semantics="subscriptions" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.String" Nullable="false" MaxLength="32" sap:label="Sub. ID" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+                <Property Name="user" Type="Edm.String" MaxLength="12" m:FC_TargetPath="SyndicationAuthorName" m:FC_KeepInContent="false" sap:label="User Name" sap:creatable="false" sap:filterable="false"/>
+                <Property Name="updated" Type="Edm.DateTime" Precision="0" m:FC_TargetPath="SyndicationUpdated" m:FC_KeepInContent="false" sap:label="Time Stamp" sap:creatable="false" sap:filterable="false"/>
+                <Property Name="title" Type="Edm.String" MaxLength="255" m:FC_TargetPath="SyndicationTitle" m:FC_KeepInContent="false" sap:label="Title" sap:filterable="false"/>
+                <Property Name="deliveryAddress" Type="Edm.String" sap:label="Delivery Address" sap:filterable="false"/>
+                <Property Name="persistNotifications" Type="Edm.Boolean" sap:label="Persist Notification" sap:filterable="false"/>
+                <Property Name="collection" Type="Edm.String" MaxLength="40" sap:label="Collection" sap:filterable="false"/>
+                <Property Name="filter" Type="Edm.String" sap:label="Filter" sap:filterable="false"/>
+                <Property Name="select" Type="Edm.String" MaxLength="255" sap:label="Select" sap:filterable="false"/>
+                <Property Name="changeType" Type="Edm.String" MaxLength="30" sap:label="Change Type"/>
+            </EntityType>
+            <EntityType Name="Notification" sap:semantics="notifications" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.String" Nullable="false" MaxLength="32" sap:label="Notification ID"/>
+                <Property Name="collection" Type="Edm.String" MaxLength="40" sap:label="Collection"/>
+                <Property Name="title" Type="Edm.String" m:FC_TargetPath="SyndicationTitle" m:FC_KeepInContent="false" sap:label="Notif. Text"/>
+                <Property Name="updated" Type="Edm.DateTime" Precision="0" m:FC_TargetPath="SyndicationUpdated" m:FC_KeepInContent="false" sap:label="Time Stamp"/>
+                <Property Name="changeType" Type="Edm.String" MaxLength="30" sap:label="Change Type"/>
+                <Property Name="entriesOfInterest" Type="Edm.Int32" sap:label="No. of Entries"/>
+                <Property Name="recipient" Type="Edm.String" MaxLength="112" sap:label="Recipient" sap:creatable="false" sap:updatable="false"/>
+            </EntityType>
+            <EntityType Name="equipment" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Equipment"/>
+                </Key>
+                <Property Name="Equipment" Type="Edm.String" Nullable="false" MaxLength="18" sap:label="Equipment" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Matnr" Type="Edm.String" Nullable="false" MaxLength="18" sap:label="Material" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Equipmenttxt" Type="Edm.String" Nullable="false" MaxLength="40" sap:label="Description" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Equipmentcat" Type="Edm.String" Nullable="false" MaxLength="1" sap:label="EquipCategory" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Functionalloc" Type="Edm.String" Nullable="false" MaxLength="40" sap:label="Functional Loc." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Assetloc" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Location" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Maintenanceplant" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="MaintPlant" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="MeasuringPoint" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Point"/>
+                </Key>
+                <Property Name="Mptyp" Type="Edm.String" Nullable="false" MaxLength="1" sap:label="MeasPtCategory" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Melnr" Type="Edm.String" Nullable="false" MaxLength="12" sap:label="Entry list" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Pttxt" Type="Edm.String" Nullable="false" MaxLength="40" sap:label="Description" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Psort" Type="Edm.String" Nullable="false" MaxLength="20" sap:label="MeasPosition" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Inact" Type="Edm.String" Nullable="false" MaxLength="1" sap:label="MeasPt.inact." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Point" Type="Edm.String" Nullable="false" MaxLength="12" sap:label="Measuring point" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Atnam" Type="Edm.String" Nullable="false" MaxLength="30" sap:label="Characteristic" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Atfor" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Format" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Unitc" Type="Edm.String" Nullable="false" MaxLength="6" sap:label="CharactUnit" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Mpobj" Type="Edm.String" Nullable="false" MaxLength="22" sap:label="OBjNo.MeasPObj." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Tplnr" Type="Edm.String" Nullable="false" MaxLength="30" sap:label="Functional loc." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <NavigationProperty Name="toMeasuringDoc" Relationship="ZPM_MEASURING_POINT_SRV.measureToDoc" FromRole="FromRole_measureToDoc" ToRole="ToRole_measureToDoc"/>
+            </EntityType>
+            <EntityType Name="MeasuringDoc" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Mdocm"/>
+                    <PropertyRef Name="Point"/>
+                </Key>
+                <Property Name="Aedat" Type="Edm.DateTime" Precision="7" sap:label="Changed on" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Recdvc" Type="Edm.String" MaxLength="16" sap:label="Target value" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Recdu" Type="Edm.String" Nullable="false" MaxLength="3" sap:label="DocMeasUnit" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" sap:semantics="unit-of-measure"/>
+                <Property Name="Mdocm" Type="Edm.String" Nullable="false" MaxLength="20" sap:label="MeasDocument" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Point" Type="Edm.String" Nullable="false" MaxLength="12" sap:label="Measuring point" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Idate" Type="Edm.DateTime" Nullable="false" Precision="7" sap:label="Date" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Mdtxt" Type="Edm.String" Nullable="false" MaxLength="40" sap:label="Text" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Itime" Type="Edm.Time" Nullable="false" Precision="0" sap:label="MeasurementTime" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Codct" Type="Edm.String" Nullable="false" MaxLength="1" sap:label="Catalog type" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Codgr" Type="Edm.String" Nullable="false" MaxLength="8" sap:label="Code group" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Vlcod" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Valuation code" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Tplnr" Type="Edm.String" Nullable="false" MaxLength="30" sap:label="Functional loc." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Recdv" Type="Edm.Double" Nullable="false" sap:label="MeasReading" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="FunctionalLocation" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Funclocid"/>
+                </Key>
+                <Property Name="Funclocid" Type="Edm.String" Nullable="false" MaxLength="30" sap:label="Functional loc." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Funcloc" Type="Edm.String" Nullable="false" MaxLength="40" sap:label="Functional Loc." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Category" Type="Edm.String" Nullable="false" MaxLength="1" sap:label="FunctLocCat." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Descript" Type="Edm.String" Nullable="false" MaxLength="40" sap:label="Description" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Strind" Type="Edm.String" Nullable="false" MaxLength="5" sap:label="StrIndicator" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Supfloc" Type="Edm.String" Nullable="false" MaxLength="30" sap:label="SupFunctLoc." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Maintplant" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="MaintPlant" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Sortfield" Type="Edm.String" Nullable="false" MaxLength="30" sap:label="Sort field" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="EntryList" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Melnr"/>
+                </Key>
+                <Property Name="Melnr" Type="Edm.String" Nullable="false" MaxLength="12" sap:label="Entry list" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Namel" Type="Edm.String" Nullable="false" MaxLength="20" sap:label="Entry list name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Meltx" Type="Edm.String" Nullable="false" MaxLength="40" sap:label="Description" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <NavigationProperty Name="toMeasuringPoint" Relationship="ZPM_MEASURING_POINT_SRV.entryToMeasure" FromRole="FromRole_entryToMeasure" ToRole="ToRole_entryToMeasure"/>
+            </EntityType>
+            <EntityType Name="Entry" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Functionalloc"/>
+                    <PropertyRef Name="Equipment"/>
+                    <PropertyRef Name="Measurepoint"/>
+                    <PropertyRef Name="Flag"/>
+                </Key>
+                <Property Name="Functionalloc" Type="Edm.String" Nullable="false" MaxLength="30" sap:label="Functional loc." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Equipment" Type="Edm.String" Nullable="false" MaxLength="18" sap:label="Equipment" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Measurepoint" Type="Edm.String" Nullable="false" MaxLength="12" sap:label="Measuring point" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Description" Type="Edm.String" Nullable="false" MaxLength="40" sap:label="Char" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Flag" Type="Edm.String" Nullable="false" MaxLength="1" sap:label="Single-Character Indicator" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <Association Name="entryToMeasure" sap:content-version="1">
+                <End Type="ZPM_MEASURING_POINT_SRV.EntryList" Multiplicity="0..1" Role="FromRole_entryToMeasure"/>
+                <End Type="ZPM_MEASURING_POINT_SRV.MeasuringPoint" Multiplicity="*" Role="ToRole_entryToMeasure"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_entryToMeasure">
+                        <PropertyRef Name="Melnr"/>
+                    </Principal>
+                    <Dependent Role="ToRole_entryToMeasure">
+                        <PropertyRef Name="Melnr"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="measureToDoc" sap:content-version="1">
+                <End Type="ZPM_MEASURING_POINT_SRV.MeasuringPoint" Multiplicity="0..1" Role="FromRole_measureToDoc"/>
+                <End Type="ZPM_MEASURING_POINT_SRV.MeasuringDoc" Multiplicity="*" Role="ToRole_measureToDoc"/>
+            </Association>
+            <EntityContainer Name="ZPM_MEASURING_POINT_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
+                <EntitySet Name="SubscriptionCollection" EntityType="ZPM_MEASURING_POINT_SRV.Subscription" sap:content-version="1"/>
+                <EntitySet Name="NotificationCollection" EntityType="ZPM_MEASURING_POINT_SRV.Notification" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="equipmentSet" EntityType="ZPM_MEASURING_POINT_SRV.equipment" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="MeasuringPointSet" EntityType="ZPM_MEASURING_POINT_SRV.MeasuringPoint" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
+                <EntitySet Name="MeasuringDocSet" EntityType="ZPM_MEASURING_POINT_SRV.MeasuringDoc" sap:searchable="true" sap:content-version="1"/>
+                <EntitySet Name="FunctionalLocationSet" EntityType="ZPM_MEASURING_POINT_SRV.FunctionalLocation" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="EntryListSet" EntityType="ZPM_MEASURING_POINT_SRV.EntryList" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="EntrySet" EntityType="ZPM_MEASURING_POINT_SRV.Entry" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <AssociationSet Name="measureToMeasuringDocSet" Association="ZPM_MEASURING_POINT_SRV.measureToDoc" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="MeasuringPointSet" Role="FromRole_measureToDoc"/>
+                    <End EntitySet="MeasuringDocSet" Role="ToRole_measureToDoc"/>
+                </AssociationSet>
+                <AssociationSet Name="entryToMeasuringPointSet" Association="ZPM_MEASURING_POINT_SRV.entryToMeasure" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="EntryListSet" Role="FromRole_entryToMeasure"/>
+                    <End EntitySet="MeasuringPointSet" Role="ToRole_entryToMeasure"/>
+                </AssociationSet>
+            </EntityContainer>
+            <atom:link rel="self" href="https://devngw01.virtual:48443/sap/opu/odata/sap/ZPM_MEASURING_POINT_SRV/$metadata"
+                xmlns:atom="http://www.w3.org/2005/Atom"/>
+                <atom:link rel="latest-version" href="https://devngw01.virtual:48443/sap/opu/odata/sap/ZPM_MEASURING_POINT_SRV/$metadata"
+                    xmlns:atom="http://www.w3.org/2005/Atom"/>
+                </Schema>
+            </edmx:DataServices>
+        </edmx:Edmx>

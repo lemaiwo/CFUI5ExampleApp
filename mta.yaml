@@ -1,0 +1,81 @@
+_schema-version: "3.2"
+ID: ExampleProject
+version: 0.0.1
+modules:
+- name: ExampleProject-destination-content
+  type: com.sap.application.content
+  requires:
+  - name: uaa_ExampleProject
+    parameters:
+      service-key:
+        name: uaa_ExampleProject-key
+  - name: ExampleProject_html_repo_host
+    parameters:
+      service-key:
+        name: ExampleProject_html_repo_host-key
+  - name: ExampleProject-destination-service
+    parameters:
+      content-target: true
+  parameters:
+    content:
+      subaccount:
+        destinations:
+        - Name: com_balta_example_ExampleProject_html_repo_host
+          ServiceInstanceName: ExampleProject-html5-app-host-service
+          ServiceKeyName: ExampleProject_html_repo_host-key
+          sap.cloud.service: com.balta.example
+        - Authentication: OAuth2UserTokenExchange
+          Name: com_balta_example_uaa_ExampleProject
+          ServiceInstanceName: ExampleProject-xsuaa-service
+          ServiceKeyName: uaa_ExampleProject-key
+          sap.cloud.service: com.balta.example
+        existing_destinations_policy: update
+  build-parameters:
+    no-source: true
+- name: ExampleProject_ui_deployer
+  type: com.sap.application.content
+  path: .
+  requires:
+  - name: ExampleProject_html_repo_host
+    parameters:
+      content-target: true
+  build-parameters:
+    build-result: resources
+    requires:
+    - artifacts:
+      - ExampleApp-content.zip
+      name: ExampleApp
+      target-path: resources/
+- name: ExampleApp
+  type: html5
+  path: ExampleApp
+  build-parameters:
+    builder: custom
+    commands:
+    - npm run build
+    supported-platforms: []
+resources:
+- name: ExampleProject-destination-service
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: destination
+    service-name: ExampleProject-destination-service
+    service-plan: lite
+- name: ExampleProject_html_repo_host
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: html5-apps-repo
+    service-name: ExampleProject-html5-app-host-service
+    service-plan: app-host
+- name: uaa_ExampleProject
+  type: org.cloudfoundry.managed-service
+  parameters:
+    path: ./xs-security.json
+    service: xsuaa
+    service-name: ExampleProject-xsuaa-service
+    service-plan: application
+build-parameters:
+  before-all:
+  - builder: custom
+    commands:
+    - npm install
