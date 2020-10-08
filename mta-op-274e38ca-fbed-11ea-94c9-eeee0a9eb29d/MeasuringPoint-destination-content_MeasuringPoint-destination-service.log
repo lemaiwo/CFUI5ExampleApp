@@ -1,4 +1,0 @@
-#2.0#2020 09 21 09:31:10.144#Z#DEBUG#com.sap.cloud.lm.sl.xs2.274e38ca-fbed-11ea-94c9-eeee0a9eb29d.MeasuringPoint-destination-content_MeasuringPoint-destination-service.synchronousContentDeployTask#
-######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-1702###
-[SynchronousContentDeployStep] [INFO] Deploy finished successfully#
-

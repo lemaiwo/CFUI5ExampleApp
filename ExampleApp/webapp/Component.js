@@ -1,17 +1,12 @@
 
-// @ts-ignore
-sap.ui.getCore().loadLibrary("com.balta.examplelibrary", "/combaltaexampleLibrary.combaltaexamplelibrary/resources/com/balta/examplelibrary");
-
 sap.ui.define([
     "sap/ui/core/UIComponent",
     "sap/ui/Device",
-    "./model/models",
-    "./controller/ListSelector",
-    "./controller/ErrorHandler"
-], function (UIComponent, Device, models, ListSelector, ErrorHandler) {
+    "./model/models"
+], function (UIComponent, Device, models) {
     "use strict";
 
-    return UIComponent.extend("com.balta.ExampleApp.Component", {
+    return UIComponent.extend("be.wl.ExampleApp.Component", {
 
         metadata: {
             manifest: "json"
@@ -24,9 +19,6 @@ sap.ui.define([
 		 * @override
 		 */
         init: function () {
-            this.oListSelector = new ListSelector();
-            this._oErrorHandler = new ErrorHandler(this);
-
             // set the device model
             this.setModel(models.createDeviceModel(), "device");
             // set the FLP model

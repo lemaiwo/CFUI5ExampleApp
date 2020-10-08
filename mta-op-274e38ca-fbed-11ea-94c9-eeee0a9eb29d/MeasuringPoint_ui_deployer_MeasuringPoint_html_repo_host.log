@@ -1,4 +1,0 @@
-#2.0#2020 09 21 09:31:28.919#Z#DEBUG#com.sap.cloud.lm.sl.xs2.274e38ca-fbed-11ea-94c9-eeee0a9eb29d.MeasuringPoint_ui_deployer_MeasuringPoint_html_repo_host.startContentDeployTask#
-######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-2505###
-[PollDeployContentStatusExecution] [INFO] Application content was successfully uploaded { CODE: '1002' }#
-

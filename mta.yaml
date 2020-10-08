@@ -23,12 +23,12 @@ modules:
         - Name: com_balta_example_ExampleProject_html_repo_host
           ServiceInstanceName: ExampleProject-html5-app-host-service
           ServiceKeyName: ExampleProject_html_repo_host-key
-          sap.cloud.service: com.balta.example
+          sap.cloud.service: be.wl.example
         - Authentication: OAuth2UserTokenExchange
           Name: com_balta_example_uaa_ExampleProject
           ServiceInstanceName: ExampleProject-xsuaa-service
           ServiceKeyName: uaa_ExampleProject-key
-          sap.cloud.service: com.balta.example
+          sap.cloud.service: be.wl.example
         existing_destinations_policy: update
   build-parameters:
     no-source: true

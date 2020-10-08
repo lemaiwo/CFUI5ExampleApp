@@ -1,7 +1,7 @@
 {
     "_version": "1.12.0",
     "sap.app": {
-        "id": "com.balta.ExampleApp",
+        "id": "be.wl.ExampleApp",
         "type": "application",
         "i18n": "i18n/i18n.properties",
         "title": "{{appTitle}}",
@@ -25,14 +25,6 @@
         },
         "resources": "resources.json",
         "dataSources": {
-            "mainService": {
-                "uri": "sap/opu/odata/sap/ZPM_MEASURING_POINT_SRV/",
-                "type": "OData",
-                "settings": {
-                    "odataVersion": "2.0",
-                    "localUri": "localService/metadata.xml"
-                }
-            }
         }
     },
     "sap.fiori": {
@@ -57,7 +49,7 @@
     },
     "sap.ui5": {
         "rootView": {
-            "viewName": "com.balta.ExampleApp.view.App",
+            "viewName": "be.wl.ExampleApp.view.App",
             "type": "XML",
             "async": true,
             "id": "app"
@@ -73,7 +65,8 @@
                 "sap.ushell": {},
                 "sap.collaboration": {
                     "lazy": true
-                }
+                },
+                "be.wl.examplelibrary":{}
             }
         },
         "contentDensities": {
@@ -84,72 +77,38 @@
             "i18n": {
                 "type": "sap.ui.model.resource.ResourceModel",
                 "settings": {
-                    "bundleName": "com.balta.ExampleApp.i18n.i18n"
-                }
-            },
-            "": {
-                "dataSource": "mainService",
-                "preload": true,
-                "settings": {
-                    "defaultBindingMode": "TwoWay",
-                    "defaultCountMode": "Inline",
-                    "refreshAfterChange": false
+                    "bundleName": "be.wl.ExampleApp.i18n.i18n"
                 }
             }
         },
-        "routing": {
-            "config": {
-                "routerClass": "sap.f.routing.Router",
-                "viewType": "XML",
-                "viewPath": "com.balta.ExampleApp.view",
-                "controlId": "layout",
-                "controlAggregation": "beginColumnPages",
-                "bypassed": {
-                    "target": "notFound"
-                },
-                "async": true
-            },
-            "routes": [
-                {
-                    "pattern": "",
-                    "name": "master",
-                    "target": "master"
-                },
-                {
-                    "pattern": "MeasuringPointSet/{objectId}",
-                    "name": "object",
-                    "target": [
-                        "master",
-                        "object"
-                    ]
-                }
-            ],
-            "targets": {
-                "master": {
-                    "viewName": "Master",
-                    "viewLevel": 1,
-                    "viewId": "master"
-                },
-                "object": {
-                    "viewName": "Detail",
-                    "viewId": "detail",
-                    "viewLevel": 1,
-                    "controlAggregation": "midColumnPages"
-                },
-                "detailObjectNotFound": {
-                    "viewName": "DetailObjectNotFound",
-                    "viewId": "detailObjectNotFound",
-                    "controlAggregation": "midColumnPages"
-                },
-                "notFound": {
-                    "viewName": "NotFound",
-                    "viewId": "notFound"
-                }
-            }
-        }
+		"routing": {
+			"config": {
+				"routerClass": "sap.m.routing.Router",
+				"viewType": "XML",
+				"async": true,
+				"viewPath": "be.wl.DemoApp.view",
+				"controlAggregation": "pages",
+				"controlId": "app",
+				"clearControlAggregation": false
+			},
+			"routes": [{
+				"name": "RouteApp",
+				"pattern": "RouteApp",
+				"target": ["TargetApp"]
+			}],
+			"targets": {
+				"TargetApp": {
+					"viewType": "XML",
+					"transition": "slide",
+					"clearControlAggregation": false,
+					"viewId": "App",
+					"viewName": "App"
+				}
+			}
+		}
     },
     "sap.cloud": {
         "public": true,
-        "service": "com.balta.example"
+        "service": "be.wl.example"
     }
 }
